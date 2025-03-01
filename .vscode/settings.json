@@ -1,4 +1,6 @@
 {
+    // "editor.formatOnSave": true,
+    // "editor.formatOnSaveMode": "file",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.quickSuggestions": {
         "strings": "on"
@@ -9,4 +11,5 @@
     "eslint.workingDirectories": [
         { "mode": "auto" }
     ],
+    "prettier.useEditorConfig": false,
 }
