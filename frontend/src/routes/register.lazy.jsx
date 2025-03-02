@@ -163,7 +163,7 @@ function Register() {
   const physicalAbilityDialogue = (
     <>
       <label className="my-10 text-2xl font-bold">
-        이제 거의 다 왔어요! 마지막으로 체력측정 결과만 알려주세요.
+        체력측정 결과를 알려주세요.
       </label>
 
       <label htmlFor="pushUpInput">팔굽혀펴기</label>
@@ -222,8 +222,7 @@ function Register() {
   const registerInfoPage = (
     <>
       <h2 className="text-2xl">
-        Milifit과 함께하게 된 것을 축하해요! {name}님에 대해서 조금만 더
-        알려주세요.
+        이제 거의 다 왔어요! {name}님에 대해서 조금만 더 알려주세요.
       </h2>
       <div>
         <label htmlFor="disabledNameInput">이름</label>
