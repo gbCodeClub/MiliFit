@@ -6,7 +6,7 @@ export const Route = createRootRoute({
   component: () => {
     return (
       <>
-        <div className="bg-lightgreen">
+        <div className="bg-lightgreen flex min-h-screen flex-col">
           <Header />
           <Outlet />
         </div>

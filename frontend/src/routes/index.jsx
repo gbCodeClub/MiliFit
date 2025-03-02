@@ -6,7 +6,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div >
+    <div>
       <h2 className="py-2 text-center font-[Playfair_Display] text-3xl font-bold italic">
         Built for the army, fit for your body.
       </h2>
