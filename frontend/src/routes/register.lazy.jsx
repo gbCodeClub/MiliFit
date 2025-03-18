@@ -85,19 +85,20 @@ function Register() {
                 "진급이라니 군인다운 멋진 목표네요! 현재 계급이 어떻게
                 되시나요?"
               </label>
-
-              {["이병", "일병", "상병", "병장"].map((element, index) => (
-                <button
-                  key={index}
-                  className="mx-10 rounded border px-6 py-3 text-black"
-                  onClick={() => {
-                    setGoalDetails({ ...goalDetails, currentRank: element });
-                    goToNextSlide();
-                  }}
-                >
-                  {element}
-                </button>
-              ))}
+              <div className="grid grid-cols-2 gap-4">
+                {["이병", "일병", "상병", "병장"].map((element, index) => (
+                  <button
+                    key={index}
+                    className="mx-10 rounded border px-6 py-3 text-black"
+                    onClick={() => {
+                      setGoalDetails({ ...goalDetails, currentRank: element });
+                      goToNextSlide();
+                    }}
+                  >
+                    {element}
+                  </button>
+                ))}
+              </div>
             </>
           ) : (
             <>
@@ -190,9 +191,25 @@ function Register() {
           </>
         )}
         {slideNum === 4 && (
-          <>
+          <div id="slide-5" className="flex flex-col items-center">
             <h2 className="text-2xl">{name}님 만을 위한 맞춤 루틴이에요!</h2>
-            여기 들어갈 내용 생각해보기
+            <div
+              id="routine-suggestion"
+              className="flex flex-col items-center self-stretch"
+            >
+              <div className="my-4 self-stretch rounded-lg border p-4 shadow-md">
+                <h3 className="text-xl font-bold">턱걸이</h3>
+                <p>3세트, 8-12회</p>
+              </div>
+              <div className="my-4 self-stretch rounded-lg border p-4 shadow-md">
+                <h3 className="text-xl font-bold">스쿼트</h3>
+                <p>4세트, 10-15회, 50kg</p>
+              </div>
+              <div className="my-4 self-stretch rounded-lg border p-4 shadow-md">
+                <h3 className="text-xl font-bold">벤치 프레스</h3>
+                <p>4세트, 8-12회, 40kg</p>
+              </div>
+            </div>
             <button
               className="mx-10 rounded border px-6 py-3 text-black"
               onClick={() => {
@@ -201,7 +218,7 @@ function Register() {
             >
               Milifit 시작하기!
             </button>
-          </>
+          </div>
         )}
         {slideNum === 5 && (
           <div id="slide-6" className="flex flex-col items-center">
@@ -214,7 +231,7 @@ function Register() {
             >
               <div
                 id="register-labels"
-                className="flex grow flex-col content-center gap-3"
+                className="flex grow-1 flex-col content-center gap-3"
               >
                 <label
                   htmlFor="emailInput"
@@ -231,12 +248,12 @@ function Register() {
               </div>
               <div
                 id="register-inputs"
-                className="flex grow flex-col content-center gap-3"
+                className="flex grow-2 flex-col content-center gap-3"
               >
                 <input
                   id="emailInput"
                   type="email"
-                  className="h-20 w-60 rounded border text-center text-2xl"
+                  className="h-20 self-stretch rounded border text-center text-2xl"
                   value={email}
                   onChange={(event) => {
                     setEmail(event.target.value);
@@ -245,7 +262,7 @@ function Register() {
                 <input
                   id="passwordInput"
                   type="password"
-                  className="h-20 w-60 rounded border text-center text-2xl"
+                  className="h-20 self-stretch rounded border text-center text-2xl"
                   value={password}
                   onChange={(event) => {
                     setPassword(event.target.value);
