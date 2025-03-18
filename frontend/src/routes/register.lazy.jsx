@@ -358,7 +358,8 @@ function Register() {
             key={index}
             className={`mx-1 h-4 w-4 rounded-full ${
               slideNum >= element ? "bg-darkgreen" : "bg-gray-300"
-            }`}
+            } cursor-pointer`}
+            onClick={() => setSlideNum(element)}
           ></div>
         ))}
       </div>
