@@ -2,6 +2,9 @@ import { createLazyFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ExcerciseGoal, initializeGoalDetails } from "../utils/goalData";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
 export const Route = createLazyFileRoute("/register")({
   component: Register,
 });
@@ -49,9 +52,9 @@ function Register() {
             <label htmlFor="nameInput" className="my-10 text-2xl font-bold">
               같이 운동하게 돼서 너무 좋아요! 이름이 어떻게 되시나요?
             </label>
-            <input
+            <Input
               id="nameInput"
-              className="h-20 w-60 rounded border text-center text-2xl tracking-widest"
+              className="border-darkgreen h-20 w-60 rounded border-2 text-center !text-2xl tracking-widest"
               value={name}
               onChange={handleNameChange}
             />
@@ -64,16 +67,16 @@ function Register() {
             </label>
             <div id="possibleGoals" className="flex flex-row justify-around">
               {Object.keys(ExcerciseGoal).map((element, index) => (
-                <button
+                <Button
                   key={index}
-                  className="mx-10 rounded border px-6 py-3 text-black"
+                  className="mx-10 px-4 py-2"
                   onClick={() => {
                     updateGoal(ExcerciseGoal[element]);
                     goToNextSlide();
                   }}
                 >
                   {ExcerciseGoal[element].description}
-                </button>
+                </Button>
               ))}
             </div>
           </>
@@ -87,16 +90,16 @@ function Register() {
               </label>
               <div className="grid grid-cols-2 gap-4">
                 {["이병", "일병", "상병", "병장"].map((element, index) => (
-                  <button
+                  <Button
                     key={index}
-                    className="mx-10 rounded border px-6 py-3 text-black"
+                    className="mx-10 px-6 py-3"
                     onClick={() => {
                       setGoalDetails({ ...goalDetails, currentRank: element });
                       goToNextSlide();
                     }}
                   >
                     {element}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </>
@@ -108,9 +111,9 @@ function Register() {
               </label>
               <label htmlFor="currentWeightInput">현재 몸무게</label>
               <div className="flex flex-row">
-                <input
+                <Input
                   id="currentWeightInput"
-                  className="h-20 w-60 rounded border text-center text-2xl"
+                  className="border-darkgreen h-20 w-60 rounded border-2 text-center !text-2xl"
                   value={goalDetails.currentWeight}
                   onChange={(event) => {
                     setGoalDetails({
@@ -124,9 +127,9 @@ function Register() {
 
               <label htmlFor="goalWeightInput">목표 몸무게</label>
               <div className="flex flex-row">
-                <input
+                <Input
                   id="goalWeightInput"
-                  className="h-20 w-60 rounded border text-center text-2xl"
+                  className="border-darkgreen h-20 w-60 rounded border-2 text-center !text-2xl"
                   value={goalDetails.goalWeight}
                   onChange={(event) => {
                     setGoalDetails({
@@ -138,14 +141,14 @@ function Register() {
                 kg
               </div>
 
-              <button
-                className="mx-10 rounded border px-6 py-3 text-black"
+              <Button
+                className="mx-10 px-6 py-3"
                 onClick={() => {
                   goToNextSlide();
                 }}
               >
                 {goal.shortDescription} 하러 가기!
-              </button>
+              </Button>
             </>
           ))}
         {slideNum === 3 && (
@@ -156,9 +159,9 @@ function Register() {
 
             <label htmlFor="pushUpInput">팔굽혀펴기</label>
             <div className="flex flex-row">
-              <input
+              <Input
                 id="pushUpInput"
-                className="h-20 w-60 rounded border text-center text-2xl"
+                className="border-darkgreen h-20 w-60 rounded border-2 text-center !text-2xl"
                 value={pushUp}
                 onChange={(event) => {
                   setPushUp(event.target.value);
@@ -169,9 +172,9 @@ function Register() {
 
             <label htmlFor="sitUpInput">윗몸 일으키기</label>
             <div className="flex flex-row">
-              <input
+              <Input
                 id="sitUpInput"
-                className="h-20 w-60 rounded border text-center text-2xl"
+                className="border-darkgreen h-20 w-60 rounded border-2 text-center !text-2xl"
                 value={sitUp}
                 onChange={(event) => {
                   setSitUp(event.target.value);
@@ -180,14 +183,14 @@ function Register() {
               개
             </div>
 
-            <button
-              className="mx-10 my-5 rounded border px-6 py-3 text-black"
+            <Button
+              className="mx-10 my-5 px-6 py-3"
               onClick={() => {
                 goToNextSlide();
               }}
             >
               나를 위한 맞춤 루틴 확인하기!
-            </button>
+            </Button>
           </>
         )}
         {slideNum === 4 && (
@@ -210,14 +213,14 @@ function Register() {
                 <p>4세트, 8-12회, 40kg</p>
               </div>
             </div>
-            <button
-              className="mx-10 rounded border px-6 py-3 text-black"
+            <Button
+              className="mx-10 px-6 py-3"
               onClick={() => {
                 goToNextSlide();
               }}
             >
               Milifit 시작하기!
-            </button>
+            </Button>
           </div>
         )}
         {slideNum === 5 && (
@@ -250,19 +253,19 @@ function Register() {
                 id="register-inputs"
                 className="flex grow-2 flex-col content-center gap-3"
               >
-                <input
+                <Input
                   id="emailInput"
                   type="email"
-                  className="h-20 self-stretch rounded border text-center text-2xl"
+                  className="border-darkgreen h-20 self-stretch rounded border-2 text-center !text-2xl"
                   value={email}
                   onChange={(event) => {
                     setEmail(event.target.value);
                   }}
                 />
-                <input
+                <Input
                   id="passwordInput"
                   type="password"
-                  className="h-20 self-stretch rounded border text-center text-2xl"
+                  className="border-darkgreen h-20 self-stretch rounded border-2 text-center !text-2xl"
                   value={password}
                   onChange={(event) => {
                     setPassword(event.target.value);
