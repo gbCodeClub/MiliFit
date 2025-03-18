@@ -12,9 +12,14 @@ export default function Header() {
           alt="Milifit"
         />
       </Link>
-      <Link to={"/login"} className="grow basis-0 text-white">
-        로그인
-      </Link>
+      <div className="flex grow basis-0 flex-row items-center justify-end">
+        <Link
+          to={"/login"}
+          className="text-darkgreen mx-4 inline-block rounded-lg bg-[#F5F5DC] px-6 py-3 font-bold transition hover:bg-[#D6CFC7]"
+        >
+          로그인
+        </Link>
+      </div>
     </nav>
   );
 }
