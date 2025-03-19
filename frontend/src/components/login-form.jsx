@@ -3,8 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useContext } from "react";
+import { UserContext } from "@/contexts";
 
 export function LoginForm({ className, ...props }) {
+  let [, setUsername] = useContext(UserContext);
+  function login(event) {
+    event.preventDefault();
+    setUsername(event.target.elements.email.value); // for now, just set username to email
+  }
+
   return (
     <div
       className={cn("flex flex-col items-center gap-6", className)}
@@ -12,7 +20,7 @@ export function LoginForm({ className, ...props }) {
     >
       <Card className="w-2/3 overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-1">
-          <form className="p-6 md:p-8">
+          <form className="p-6 md:p-8" onSubmit={login}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">반갑습니다!</h1>
