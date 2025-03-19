@@ -7,6 +7,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+
 export default function Header() {
   let [username] = useContext(UserContext);
 
@@ -34,13 +41,48 @@ export default function Header() {
       </Link>
       <div className="flex grow basis-0 flex-row items-center justify-end">
         {username ? (
-          <Avatar className="mx-4 h-12 w-12">
-            <AvatarImage
-              src="change-when-adding-support-for-profiles"
-              alt="@shadcn"
-            />
-            <AvatarFallback>{username[0].toUpperCase()}</AvatarFallback>
-          </Avatar>
+          <>
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    to="/about"
+                    className="text-lightgreen font-bold"
+                    asChild
+                  >
+                    <Link to="/about" className="h-full w-full">
+                      소개
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    to="/"
+                    className="text-lightgreen font-bold"
+                    asChild
+                  >
+                    <Link to="/">유저 홈</Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    to="/community"
+                    className="text-lightgreen font-bold"
+                    asChild
+                  >
+                    <Link to="/community">커뮤니티</Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+            <Avatar className="mx-4 h-12 w-12">
+              <AvatarImage
+                src="change-when-adding-support-for-profiles"
+                alt="@shadcn"
+              />
+              <AvatarFallback>{username[0].toUpperCase()}</AvatarFallback>
+            </Avatar>
+          </>
         ) : (
           <Link
             to={"/login"}
