@@ -5,12 +5,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useContext } from "react";
 import { UserContext } from "@/contexts";
+import { useNavigate } from "@tanstack/react-router";
 
 export function LoginForm({ className, ...props }) {
   let [, setUsername] = useContext(UserContext);
+  const navigate = useNavigate({ from: "/login" });
   function login(event) {
     event.preventDefault();
     setUsername(event.target.elements.email.value); // for now, just set username to email
+    navigate({
+      to: "/",
+    });
   }
 
   return (
