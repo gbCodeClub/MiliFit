@@ -8,12 +8,23 @@ import {
 } from "@/components/ui/accordion";
 
 import fitnessPhoto from "/src/assets/fitness.jpg";
+import { useContext } from "react";
+import { UserContext } from "@/contexts";
+import RoutineDisplay from "@/components/user/RoutineDisplay";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
 function Index() {
+  const [username] = useContext(UserContext);
+  if (username) {
+    return <IndexLoggedIn username={username} />;
+  }
+  return <IndexNoLogin />;
+}
+
+function IndexNoLogin() {
   return (
     <div className="flex h-full flex-col items-center">
       <h2 className="py-2 text-center font-[Playfair_Display] text-3xl font-bold italic">
@@ -109,6 +120,23 @@ function Index() {
       >
         시작하기
       </Link>
+    </div>
+  );
+}
+
+function IndexLoggedIn({ username }) {
+  return (
+    <div id="index-logged-in">
+      <h2 className="py-2 text-center font-[Playfair_Display] text-3xl font-bold italic">
+        {username}님, 반갑습니다! 오늘의 운동 루틴을 알려드릴게요.
+      </h2>
+      <RoutineDisplay />
+      <button
+        onClick={() => window.print()}
+        className="bg-darkgreen mt-4 inline-block rounded-lg px-6 py-3 font-bold text-white transition hover:opacity-[0.9]"
+      >
+        운동 루틴 인쇄하기
+      </button>
     </div>
   );
 }
