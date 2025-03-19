@@ -56,7 +56,7 @@ function Index() {
             구체적으로 어떤 기능이 있나요?
           </AccordionTrigger>
           <AccordionContent className="text-lg text-black">
-            <ol className="list-decimal pl-4">
+            <ol className="ml-4 list-decimal pl-4">
               <li className="my-2">
                 <span className="font-bold">목표</span>와{" "}
                 <span className="font-bold">운동 능력</span>에 기반한{" "}
