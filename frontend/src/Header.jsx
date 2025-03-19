@@ -4,13 +4,27 @@ import { useContext } from "react";
 import { UserContext } from "./contexts";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 export default function Header() {
   let [username] = useContext(UserContext);
 
   return (
     <nav className="bg-darkgreen flex flex-row">
-      <div className="grow basis-0"></div>
+      <div className="flex grow basis-0 flex-row">
+        {username ? (
+          <div className="flex flex-row items-center space-x-2 self-stretch">
+            <Switch id="airplane-mode" className="dark mx-3" />
+            <Label
+              htmlFor="airplane-mode"
+              className="text-lightgreen text-lg font-bold"
+            >
+              휴가
+            </Label>
+          </div>
+        ) : null}
+      </div>
       <Link to={"/"} className="self-center">
         <img
           src={milifitLogo}
