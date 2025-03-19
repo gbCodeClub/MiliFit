@@ -35,7 +35,9 @@ function Register() {
 
   async function handleNameChange(event) {
     setName(event.target.value);
-    if (name.length === 3) {
+
+    var korean_pattern = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+    if (name.length === 3 && korean_pattern.test(event.target.value)) {
       await sleep(0.5);
       goToNextSlide();
     }
