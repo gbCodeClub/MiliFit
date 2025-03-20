@@ -1,6 +1,6 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import milifitLogo from "/src/assets/milifit-withname.svg";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "./contexts";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -15,7 +15,16 @@ import {
 } from "@/components/ui/navigation-menu";
 
 export default function Header() {
-  let [username] = useContext(UserContext);
+  let [username, setUsername] = useContext(UserContext);
+  let [showOverlay, setShowOverlay] = useState(false);
+
+  const navigate = useNavigate({});
+  function logout() {
+    setUsername("");
+    navigate({
+      to: "/",
+    });
+  }
 
   return (
     <nav className="bg-darkgreen flex flex-row">
@@ -75,13 +84,42 @@ export default function Header() {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <Avatar className="mx-4 h-12 w-12">
-              <AvatarImage
-                src="change-when-adding-support-for-profiles"
-                alt="@shadcn"
-              />
-              <AvatarFallback>{username[0].toUpperCase()}</AvatarFallback>
-            </Avatar>
+            <div className="relative">
+              <button
+                onClick={() => setShowOverlay(!showOverlay)}
+                className="cursor-pointer focus:outline-none"
+              >
+                <Avatar className="mx-4 h-12 w-12">
+                  <AvatarImage
+                    src="change-when-adding-support-for-profiles"
+                    alt="@shadcn"
+                  />
+                  <AvatarFallback>{username[0].toUpperCase()}</AvatarFallback>
+                </Avatar>
+              </button>
+              {showOverlay && (
+                <div className="absolute right-0 mt-2 w-48 rounded-lg bg-white shadow-lg">
+                  <Link
+                    to="/profile"
+                    className="block !rounded-lg px-4 py-2 text-gray-800 hover:bg-gray-200"
+                  >
+                    프로필
+                  </Link>
+                  <Link
+                    to="/settings"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                  >
+                    설정
+                  </Link>
+                  <button
+                    onClick={logout}
+                    className="block w-full cursor-pointer px-4 py-2 text-left text-gray-800 hover:bg-gray-200"
+                  >
+                    로그아웃
+                  </button>
+                </div>
+              )}
+            </div>
           </>
         ) : (
           <Link

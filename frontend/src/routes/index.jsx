@@ -64,7 +64,7 @@ function IndexLoggedIn({ username }) {
               <RoutineDisplay />
             </CardContent>
             <CardFooter>
-              <p>이 식단 정보는 국방 공공데이터를 통해 얻었습니다.</p>
+              <p>⏱️예상 시간: 20분</p>
             </CardFooter>
           </Card>
         </div>
