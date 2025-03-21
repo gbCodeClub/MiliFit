@@ -1,11 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { FaThumbsUp, FaComment, FaEye } from "react-icons/fa"; // Import icons
 
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { FaRegComment } from "react-icons/fa";
-import { LuThumbsUp } from "react-icons/lu";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 export const Route = createFileRoute("/community")({
   component: RouteComponent,
@@ -17,26 +14,26 @@ function RouteComponent() {
     {
       id: 1,
       title: "First Post",
-      likeCount: 10,
-      replyCount: 2,
-      viewCount: 100,
-      contentPreview: "This is the first post preview...",
+      likes: 10,
+      comments: 2,
+      views: 100,
+      preview: "This is the first post",
     },
     {
       id: 2,
       title: "Second Post",
-      likeCount: 20,
-      replyCount: 4,
-      viewCount: 200,
-      contentPreview: "This is the second post preview...",
+      likes: 20,
+      comments: 4,
+      views: 200,
+      preview: "This is the second post",
     },
     {
       id: 3,
       title: "Third Post",
-      likeCount: 30,
-      replyCount: 6,
-      viewCount: 300,
-      contentPreview: "This is the third post preview...",
+      likes: 30,
+      comments: 6,
+      views: 300,
+      preview: "This is the third post",
     },
   ]);
 
@@ -45,10 +42,10 @@ function RouteComponent() {
   );
 
   return (
-    <div className="flex grow flex-col items-center">
-      <Card className="my-4 w-2/3 grow">
+    <div>
+      <Card>
         <CardHeader>
-          <Input
+          <input
             type="text"
             placeholder="Search posts..."
             value={searchTerm}
@@ -56,29 +53,29 @@ function RouteComponent() {
           />
         </CardHeader>
         <CardContent>
-          {filteredPosts.map((post) => (
-            <div
-              key={post.id}
-              className="my-4 self-stretch rounded-lg border p-4 shadow-md"
-            >
-              <h3 className="text-xl font-bold">{post.title}</h3>
-              <p>
-                {post.contentPreview}
-                <br />
-              </p>
-              <p className="flex items-center space-x-2">
-                <span className="flex items-center">
-                  <LuThumbsUp className="mr-1" /> {post.likeCount}
-                </span>
-                <span className="flex items-center">
-                  <FaRegComment className="mr-1" /> {post.replyCount}
-                </span>
-                <span className="flex items-center">
-                  <MdOutlineRemoveRedEye className="mr-1" /> {post.viewCount}
-                </span>
-              </p>
-            </div>
-          ))}
+          <ul>
+            {filteredPosts.map((post) => (
+              <li
+                key={post.id}
+                className="my-4 self-stretch rounded-lg border p-4 shadow-md"
+              >
+                <Link to="/posts/$postId" params={{ postId: post.id }}>
+                  <h3 className="text-xl font-bold">{post.title}</h3>
+                  <p>{post.preview}</p>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
+                    <FaThumbsUp /> {post.likes} <FaComment /> {post.comments}{" "}
+                    <FaEye /> {post.views}
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </CardContent>
       </Card>
     </div>
