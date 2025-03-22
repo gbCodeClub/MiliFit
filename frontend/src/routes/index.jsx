@@ -55,18 +55,7 @@ function IndexLoggedIn({ username }) {
           <h2 className="py-2 text-center font-[Playfair_Display] text-3xl font-bold italic">
             오늘의 운동 루틴을 알려드릴게요.
           </h2>
-          <Card className="mt-6 self-stretch">
-            <CardHeader>
-              <CardTitle>3/19 운동 루틴</CardTitle>
-              <CardDescription>스트렝스를 키우는 전신 운동</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <RoutineDisplay />
-            </CardContent>
-            <CardFooter>
-              <p>⏱️예상 시간: 20분</p>
-            </CardFooter>
-          </Card>
+          <RoutineDisplay />
         </div>
         <div
           id="index-meal-display"
