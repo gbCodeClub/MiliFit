@@ -20,6 +20,7 @@ export default function Header() {
 
   const navigate = useNavigate({});
   function logout() {
+    setShowOverlay(false);
     setUsername("");
     navigate({
       to: "/",
@@ -102,12 +103,14 @@ export default function Header() {
                   <Link
                     to="/profile"
                     className="block !rounded-lg px-4 py-2 text-gray-800 hover:bg-gray-200"
+                    onClick={() => setShowOverlay(false)}
                   >
                     프로필
                   </Link>
                   <Link
                     to="/settings"
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                    onClick={() => setShowOverlay(false)}
                   >
                     설정
                   </Link>
