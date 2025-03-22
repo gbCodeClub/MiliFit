@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -55,9 +55,11 @@ function RouteComponent() {
             <div className="flex items-center space-x-2">
               <div className="flex w-96 items-center">
                 <label className="w-32 font-semibold">구독:</label>
-                <span>free/pro</span>
+                <span>기본 플랜</span>
               </div>
-              <Button className="ml-4">프로로 업그레이드</Button>
+              <Button className="ml-4">
+                <Link to="/upgradeAccount">프로로 업그레이드</Link>
+              </Button>
             </div>
             <div className="flex items-center space-x-2">
               <div className="flex w-96 items-center">
