@@ -5,7 +5,8 @@ import { ExcerciseGoal, initializeGoalDetails } from "../utils/goalData";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import RoutineDisplay from "@/components/user/RoutineDisplay";
+import FullRoutineDisplay from "@/components/user/FullRoutineDisplay";
+import routineSelector from "@/utils/routineSelector";
 
 export const Route = createLazyFileRoute("/register")({
   component: Register,
@@ -22,9 +23,11 @@ function Register() {
   const [goalDetails, setGoalDetails] = useState();
   const [pushUp, setPushUp] = useState("");
   const [sitUp, setSitUp] = useState("");
+  let [dayPerWeek, setDayPerWeek] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const numOfSlides = 7;
   // utility functions
   function goToNextSlide() {
     setSlideNum(slideNum + 1);
@@ -43,6 +46,16 @@ function Register() {
       await sleep(0.5);
       goToNextSlide();
     }
+  }
+
+  function proficiency(pushUp, sitUp) {
+    if (pushUp <= 20 || sitUp <= 20) {
+      return 0; // beginner
+    }
+    if (pushUp <= 40 || sitUp <= 40) {
+      return 1; // intermediate
+    }
+    return 2; // advanced
   }
 
   return (
@@ -91,8 +104,8 @@ function Register() {
               <label className="my-10 text-3xl font-bold">
                 진급이라니 군인다운 멋진 목표네요! 현재 계급이 어떻게 되시나요?
               </label>
-              <div className="grid grid-cols-2 gap-4">
-                {["이병", "일병", "상병", "병장"].map((element, index) => (
+              <div className="flex gap-4">
+                {["이병", "일병", "상병"].map((element, index) => (
                   <Button
                     key={index}
                     className="mx-10 px-8 py-6 text-xl"
@@ -266,11 +279,41 @@ function Register() {
           </>
         )}
         {slideNum === 4 && (
+          <>
+            <label className="my-10 text-3xl font-bold">
+              주 몇회 운동할 계획이신가요?
+            </label>
+            <div className="flex gap-4">
+              {["2회", "3회", "4회", "5회", "6회"].map((element, index) => (
+                <Button
+                  key={index}
+                  className="mx-10 px-8 py-6 text-xl"
+                  onClick={() => {
+                    setDayPerWeek(index + 2);
+                    goToNextSlide();
+                  }}
+                >
+                  {element}
+                </Button>
+              ))}
+            </div>
+          </>
+        )}
+        {slideNum === 5 && (
           <div id="slide-5" className="flex flex-col items-center">
             <h2 className="text-3xl font-bold">
-              {name}님을 위한 맞춤 루틴이에요!
+              {name}님을 위한 맞춤 루틴이에요! 언제든지 체단실 상황, 컨디션 등에
+              따라 수정할 수 있어요.
             </h2>
-            <RoutineDisplay displayLink={false} />
+            <FullRoutineDisplay
+              displayLink={false}
+              routine={routineSelector(
+                goal,
+                proficiency(pushUp, sitUp),
+                dayPerWeek,
+              )}
+              className="w-2/3 self-center"
+            />
             <Button
               className="mx-10 my-6 px-8 py-6 text-xl"
               onClick={() => {
@@ -281,7 +324,7 @@ function Register() {
             </Button>
           </div>
         )}
-        {slideNum === 5 && (
+        {slideNum === 6 && (
           <div id="slide-6" className="flex flex-col items-center">
             <h2 className="text-3xl font-bold">
               이제 거의 다 왔어요! {name}님에 대해서 조금만 더 알려주세요.
@@ -341,7 +384,7 @@ function Register() {
         )}
       </div>
       <div id="register-navbar" className="flex flex-row py-3">
-        {[...Array(6).keys()].map((element, index) => (
+        {[...Array(numOfSlides).keys()].map((element, index) => (
           <div
             key={index}
             className={`mx-1 h-4 w-4 rounded-full ${
